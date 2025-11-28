@@ -215,7 +215,7 @@ elif page == "Utilization":
 elif page == "Plans & Costs":
     st.title("Plans & Costs")
 
-    question = st.sidebar.radio( "Plan questions",["Average cost by plan type and network tier","Annual premium vs annual medical cost"])
+    question = st.sidebar.radio( "Plan questions",["Average cost by plan type and network tier"])
 
     if question == "Average cost by plan type and network tier":
         plan_cost = (df.groupby(["plan_type", "network_tier"], as_index=False)["annual_medical_cost"].mean())
@@ -223,7 +223,6 @@ elif page == "Plans & Costs":
         figure_9 = px.bar(plan_cost, x="plan_type", y="annual_medical_cost", color="network_tier", barmode="group",title="Average annual medical cost by plan type and network tier",labels={"plan_type": "Plan type","network_tier": "Network tier","annual_medical_cost": "Average annual cost"})
         st.plotly_chart(figure_9, use_container_width=True)
 
-    elif question == "Annual premium vs annual medical cost":
-        figure_10 = px.scatter(df,x="annual_premium",y="annual_medical_cost",color="age_group",trendline="ols",title="Annual premium vs annual medical cost",labels={"annual_premium": "Annual premium","annual_medical_cost": "Annual medical cost","age_group": "Age group"})
-        st.plotly_chart(figure_10, use_container_width=True)
+
+
 
